@@ -4,7 +4,7 @@
 # TLDR: Alpine is very slow when it comes to running Python!
 
 # STEP 1: Install base image. Optimized for Python.
-FROM python:3.7-slim-buster
+FROM python:3.10-slim-bullseye
 
 # Set a working directory inside the container
 WORKDIR /app
@@ -13,7 +13,8 @@ WORKDIR /app
 COPY requirements.txt requirements.txt
 
 # Install dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --upgrade pip \
+    && pip install --no-cache-dir -r requirements.txt
 
 # Copy the rest of the application files
 COPY . .
